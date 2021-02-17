@@ -1,0 +1,11 @@
+---
+- name: This ansible playbook is to clone git with managed nodes and it is coded by Abuthahir
+  hosts: all
+  become: true
+  vars_files:
+    - vault-pass.yml
+  tasks: 
+  - name: clone a repo to my managed instances
+    git: 
+      repo: https://abutha88:{{ password }}@github.com/Abutha88/cloudcomputing.git
+      dest: /opt/ansadmin/test-vault

@@ -1,0 +1,6 @@
+---
+- name: This playbook is to install apache packages by determining OS family and it is coded by Abuthahir
+  hosts: all
+  become: true
+  roles:
+   - setup-apache

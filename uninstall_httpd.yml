@@ -1,0 +1,13 @@
+---
+- name: This playbook is to uninstall packages via YUM command and it is coded by Abuthahir
+  hosts: webserversrhel
+  become: true
+  tasks:
+  - name: Stop HTTPD package
+    service: 
+     name: httpd
+     state: stopped
+  - name: Uninstall HTTPD Service
+    yum:
+      name: httpd
+      state: removed     

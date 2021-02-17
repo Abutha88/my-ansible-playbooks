@@ -1,0 +1,9 @@
+---
+- name: This playbook is to install packages via YUM command
+  hosts: webserversrhel
+  tasks:
+  - name: Install HTTPD package
+    yum: 
+     name: httpd
+     state: installed
+          

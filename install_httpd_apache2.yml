@@ -1,0 +1,36 @@
+---
+- name: This playbook is to install apache packages by determining OS family and it is coded by Abuthahir
+  hosts: all
+  become: true
+  gather_facts: yes
+  tasks:
+  - name: Install HTTPD package
+    yum: 
+     name: httpd
+     state: installed
+     when: ansible_os-family == "RedHat"
+     tags: install_apache
+  - name: Start HTTPD Service
+    service:
+      name: httpd
+      state: started   
+      when: ansible_os-family == "RedHat"
+      tags: start_apache
+  - name: Install apache2 service
+    apt:
+      name: apache2
+      state: present
+      when: ansible_os-family == "Debian"
+      tags: install_apache
+  - name: Start apache2 Service
+    service:
+      name: apache2
+      state: started
+      when: ansible_os-family == "Debian" 
+      tags: start_apache
+  - name: Copy HTML file to apache server page
+    copy:
+     src: /opt/ansible/index.html
+     dest: /var/www/html
+     mode: 066
+

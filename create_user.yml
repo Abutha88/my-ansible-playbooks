@@ -1,0 +1,9 @@
+---
+- name: This playbook task is to create a new user as per the host file information  
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+          - name: creating user wahida
+            user: 
+              name: wahida

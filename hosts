@@ -1,0 +1,9 @@
+[webserversrhel]
+172.31.38.221
+172.31.6.38
+
+[Applicationserveramazonlinux]
+172.31.6.38
+
+[databaseserverubuntu]
+172.31.42.6

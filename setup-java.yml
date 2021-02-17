@@ -1,0 +1,42 @@
+---
+- name: setup tomcat server and it is coded by Abuthahir
+  hosts: all
+  become: true
+  tasks:
+  - name: Installing Tomcat server package
+    yum: 
+     name: java
+     state: installed
+    when: ansible_os_family == "Redhat"
+
+  - name: Install Java on Ubuntu instance
+    apt:
+       name: openjdk-8-jdk
+       state: latest
+    when: ansible_os_family == "Ubuntu"
+
+  - name: Download Tomcat Packages
+    get_url: 
+      url: https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz
+      dest: /opt
+
+  - name: Untar apache packages
+    unarchive:
+       src: /opt/apache-tomcat-8.5.37.tar.gz
+       dest: /opt
+       remote_src: yes
+
+  - name: Add execute permission on startup.sh file
+    file: 
+       path: /opt/apache-tomcat-8.5.37/bin/startup.sh
+       mode: 0777
+  - name: Starting Tomcat services
+    shell: nohup ./startup.sh
+    args:
+      chdir: /opt/apache-tomcat-8.5.37/bin
+      ignore_errors: yes     
+
+
+
+
+     
